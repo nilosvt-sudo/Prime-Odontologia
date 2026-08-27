@@ -4,6 +4,7 @@
 
 export const CLINIC = {
   name: "Prime Odontologia",
+  brand: { theme: "ouro-grafite", version: "2026.02" },
   city: "Bicas/MG",
   address: "Praça Dr. Vicente Bianco, nº 71 — Centro, Bicas/MG",
   epao: "EPAO 14184",

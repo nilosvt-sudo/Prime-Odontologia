@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import { useId, type SVGProps } from "react";
 
 type P = SVGProps<SVGSVGElement>;
 
@@ -6,7 +6,7 @@ const base = (props: P) => ({
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.7,
+  strokeWidth: 1.5,
   strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const,
   ...props,
@@ -144,11 +144,31 @@ export const ChatIcon = (p: P) => (
   </svg>
 );
 
-/* Logotipo: dente sobre disco */
-export const LogoMark = ({ className = "" }: { className?: string }) => (
-  <span
-    className={`inline-flex items-center justify-center rounded-full bg-pine-900 text-mint-300 ${className}`}
-  >
-    <ToothIcon className="h-[58%] w-[58%]" strokeWidth={2} />
-  </span>
-);
+/* ---------- Logomarca: dente dourado fluido e vazado ---------- */
+export const LogoMark = ({ className = "" }: { className?: string }) => {
+  const id = useId();
+  return (
+    <svg viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
+      <defs>
+        <linearGradient id={`${id}-gold`} x1="9" y1="5" x2="40" y2="45" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#EDD9A4" />
+          <stop offset="0.45" stopColor="#C29A47" />
+          <stop offset="1" stopColor="#8A6726" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M24 5.8c-4.2 0-6 2.3-9 2.3-4.7 0-7.4 3.9-7 8.9.5 6.8 3.8 22.8 8.6 22.8 4 0 2.9-12.2 7.4-12.2s3.4 12.2 7.4 12.2c4.8 0 8.1-16 8.6-22.8.4-5-2.3-8.9-7-8.9-3 0-4.8-2.3-9-2.3Z"
+        stroke={`url(#${id}-gold)`}
+        strokeWidth="2.3"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.6 14.2c1.9 2.5 4.1 3.7 6.4 3.7s4.5-1.2 6.4-3.7"
+        stroke={`url(#${id}-gold)`}
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        opacity="0.75"
+      />
+    </svg>
+  );
+};

@@ -24,7 +24,7 @@ export default function App() {
         <Hero />
 
         <div className="-mt-2 -rotate-[1.2deg] scale-[1.02]">
-          <Marquee items={MARQUEE_ITEMS} tone="pine" />
+          <Marquee items={MARQUEE_ITEMS} tone="coal" />
         </div>
 
         <Services />

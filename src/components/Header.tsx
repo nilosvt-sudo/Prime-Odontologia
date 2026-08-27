@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { CLINIC, waLink } from "../config";
-import { ClockIcon, LogoMark, PhoneIcon, PinIcon } from "./Icons";
+import { ArrowIcon, InstaIcon, LogoMark, PhoneIcon, WhatsIcon } from "./Icons";
 
-const NAV = [
+const LINKS = [
   { label: "Serviços", href: "#servicos" },
   { label: "Para quem", href: "#publico" },
   { label: "A clínica", href: "#clinica" },
   { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Dúvidas", href: "#faq" },
   { label: "Contato", href: "#contato" },
 ];
 
@@ -30,132 +29,131 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* barra informativa */}
-      <div className="hidden bg-pine-950 text-mint-200 md:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2 text-[0.72rem] font-medium tracking-wide">
-          <span className="inline-flex items-center gap-1.5">
-            <PinIcon className="h-3.5 w-3.5 text-mint-400" />
-            {CLINIC.address}
-          </span>
-          <span className="inline-flex items-center gap-5">
-            <span className="inline-flex items-center gap-1.5">
-              <ClockIcon className="h-3.5 w-3.5 text-mint-400" />
-              Seg a Sex · 08h–18h
-            </span>
-            <a
-              href={waLink("Olá! Gostaria de falar com a Prime Odontologia.")}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-coral-400"
-            >
-              <PhoneIcon className="h-3.5 w-3.5 text-mint-400" />
-              {CLINIC.phoneDisplay}
-            </a>
-          </span>
-        </div>
-      </div>
-
-      {/* barra principal */}
-      <div
-        className={`border-b transition-all duration-500 ${
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "border-pine-900/10 bg-paper/90 shadow-[0_10px_40px_-18px_rgba(10,50,46,0.25)] backdrop-blur-md"
-            : "border-transparent bg-paper/70 backdrop-blur-sm"
+            ? "border-b border-coal-900/10 bg-snow/92 py-2.5 shadow-[0_12px_40px_-20px_rgba(15,17,19,0.25)] backdrop-blur-md"
+            : "border-b border-transparent bg-paper/70 py-4 backdrop-blur-sm"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3.5">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6">
           <a href="#inicio" className="group flex items-center gap-3">
-            <LogoMark className="h-11 w-11 transition-transform duration-500 group-hover:rotate-[-8deg] group-hover:scale-105" />
+            <LogoMark className="h-11 w-11 transition-transform duration-500 group-hover:rotate-[-6deg]" />
             <span className="leading-none">
-              <span className="font-display block text-[1.35rem] font-semibold tracking-tight text-pine-900">
+              <span className="font-display block text-[1.55rem] font-semibold tracking-tight text-coal-950">
                 Prime
               </span>
-              <span className="mt-1 block text-[0.58rem] font-bold tracking-[0.32em] text-pine-600 uppercase">
+              <span className="mt-0.5 block text-[0.58rem] font-bold tracking-[0.34em] text-gold-600 uppercase">
                 Odontologia
               </span>
             </span>
           </a>
 
-          <nav className="hidden items-center gap-7 lg:flex">
-            {NAV.map((item) => (
+          <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
+            {LINKS.map((l) => (
               <a
-                key={item.href}
-                href={item.href}
-                className="group relative text-sm font-semibold text-ink/75 transition-colors hover:text-pine-900"
+                key={l.href}
+                href={l.href}
+                className="group relative text-[0.83rem] font-semibold tracking-wide text-coal-700 transition-colors duration-300 hover:text-coal-950"
               >
-                {item.label}
-                <span className="absolute -bottom-1.5 left-0 h-[2px] w-0 rounded-full bg-coral-500 transition-all duration-300 group-hover:w-full" />
+                {l.label}
+                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold-500 transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="hidden items-center gap-5 lg:flex">
             <a
-              href={waLink("Olá! Quero agendar uma avaliação na Prime Odontologia.")}
+              href={waLink("Olá! Vim pelo site da Prime Odontologia.")}
               target="_blank"
               rel="noreferrer"
-              className="btn btn-coral hidden px-5 py-2.5 text-sm sm:inline-flex"
+              className="flex items-center gap-2 text-[0.83rem] font-semibold text-coal-700 transition-colors hover:text-gold-600"
             >
-              Agendar avaliação
+              <PhoneIcon className="h-4 w-4 text-gold-600" />
+              {CLINIC.phoneDisplay}
             </a>
-            <button
-              onClick={() => setOpen(!open)}
-              aria-label={open ? "Fechar menu" : "Abrir menu"}
-              aria-expanded={open}
-              className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-full border border-pine-900/15 bg-snow lg:hidden"
+            <a
+              href={waLink("Olá! Quero agendar uma avaliação na Prime Odontologia. 🙂")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-coal px-6 py-2.5 text-[0.83rem]"
             >
-              <span
-                className={`h-[2px] w-5 rounded bg-pine-900 transition-all duration-300 ${
-                  open ? "translate-y-[7px] rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`h-[2px] w-5 rounded bg-pine-900 transition-all duration-300 ${
-                  open ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`h-[2px] w-5 rounded bg-pine-900 transition-all duration-300 ${
-                  open ? "-translate-y-[7px] -rotate-45" : ""
-                }`}
-              />
-            </button>
+              <WhatsIcon className="h-4 w-4" />
+              Agendar
+            </a>
           </div>
+
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={open}
+            className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-full border border-coal-900/15 lg:hidden"
+          >
+            <span
+              className={`h-[1.5px] w-5 bg-coal-950 transition-all duration-300 ${
+                open ? "translate-y-[6.5px] rotate-45" : ""
+              }`}
+            />
+            <span className={`h-[1.5px] w-5 bg-coal-950 transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+            <span
+              className={`h-[1.5px] w-5 bg-coal-950 transition-all duration-300 ${
+                open ? "-translate-y-[6.5px] -rotate-45" : ""
+              }`}
+            />
+          </button>
         </div>
-      </div>
+      </header>
 
       {/* menu mobile */}
       <div
-        className={`fixed inset-x-0 top-0 bottom-0 z-[-1] bg-pine-950 pt-28 transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-40 bg-snow transition-all duration-500 lg:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <nav className="flex flex-col gap-1 px-8">
-          {NAV.map((item, i) => (
+        <div className="flex h-full flex-col justify-between px-8 pt-28 pb-10">
+          <nav className="flex flex-col gap-1" aria-label="Navegação mobile">
+            {[{ label: "Início", href: "#inicio" }, ...LINKS].map((l, i) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={`group flex items-center justify-between border-b border-coal-900/10 py-4 transition-all duration-500 ${
+                  open ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+                }`}
+                style={{ transitionDelay: open ? `${80 + i * 60}ms` : "0ms" }}
+              >
+                <span className="font-display text-3xl font-medium text-coal-950">{l.label}</span>
+                <ArrowIcon className="h-5 w-5 text-gold-500 transition-transform duration-300 group-hover:translate-x-1.5" />
+              </a>
+            ))}
+          </nav>
+          <div className="space-y-4">
             <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              style={{ transitionDelay: open ? `${120 + i * 50}ms` : "0ms" }}
-              className={`border-b border-mint-100/10 py-4 font-display text-3xl font-medium text-mint-100 transition-all duration-500 hover:pl-3 hover:text-coral-400 ${
-                open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-              }`}
+              href={waLink("Olá! Quero agendar uma avaliação na Prime Odontologia. 🙂")}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-gold w-full px-6 py-4 text-[0.95rem]"
             >
-              {item.label}
+              <WhatsIcon className="h-5 w-5" />
+              Agendar pelo WhatsApp
             </a>
-          ))}
-          <a
-            href={waLink("Olá! Quero agendar uma avaliação na Prime Odontologia.")}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => setOpen(false)}
-            className="btn btn-coral mt-8 px-6 py-4 text-base"
-          >
-            Agendar pelo WhatsApp
-          </a>
-        </nav>
+            <div className="flex items-center justify-center gap-6 text-sm font-semibold text-coal-700">
+              <a
+                href={CLINIC.instagramUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 hover:text-gold-600"
+              >
+                <InstaIcon className="h-4.5 w-4.5" /> {CLINIC.instagramHandle}
+              </a>
+            </div>
+            <p className="text-center text-xs text-ink/50">
+              {CLINIC.address} · {CLINIC.epao}
+            </p>
+          </div>
+        </div>
       </div>
-    </header>
+    </>
   );
 }

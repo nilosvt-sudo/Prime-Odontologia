@@ -1,45 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Fraunces", "Georgia", serif;
+  --font-display: "Playfair Display", "Georgia", serif;
   --font-body: "Manrope", "Segoe UI", sans-serif;
 
-  --color-paper: #f2f7f4;
-  --color-snow: #fafdfb;
-  --color-ink: #13251f;
+  --color-paper: #f5f4f0;
+  --color-snow: #fcfbf9;
+  --color-ink: #1a1d20;
 
-  --color-pine-950: #05201d;
-  --color-pine-900: #0a322e;
-  --color-pine-800: #0e423c;
-  --color-pine-700: #155749;
-  --color-pine-600: #1c6b5a;
+  --color-coal-950: #0f1113;
+  --color-coal-900: #15181b;
+  --color-coal-800: #1c2024;
+  --color-coal-700: #272c31;
+  --color-coal-600: #3a4046;
 
-  --color-mint-100: #e0f1ea;
-  --color-mint-200: #c3e8d9;
-  --color-mint-300: #9bd8c4;
-  --color-mint-400: #5fc2a8;
-  --color-mint-500: #34a98c;
-
-  --color-coral-100: #fde5dc;
-  --color-coral-400: #ff8a66;
-  --color-coral-500: #f96d4c;
-  --color-coral-600: #e0522e;
+  --color-gold-100: #f7efdc;
+  --color-gold-200: #efe0ba;
+  --color-gold-300: #e3cb92;
+  --color-gold-400: #d5b268;
+  --color-gold-500: #c29a47;
+  --color-gold-600: #a67f33;
+  --color-gold-700: #7f6023;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-html,
-body {
-  overflow-x: clip;
-}
-
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 section[id] {
@@ -47,8 +41,13 @@ section[id] {
 }
 
 ::selection {
-  background: var(--color-coral-500);
-  color: #fff6f2;
+  background: var(--color-gold-500);
+  color: #15181b;
+}
+
+/* tratamento editorial das fotografias — coesão com a paleta ouro/grafite */
+img {
+  filter: saturate(0.82) contrast(1.06) sepia(0.09);
 }
 
 /* ---------- textura de grão ---------- */
@@ -200,35 +199,50 @@ section[id] {
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
 }
-.btn-coral {
-  background: var(--color-coral-500);
-  color: #fff6f2;
-  box-shadow: 0 12px 32px -12px rgba(249, 109, 76, 0.6);
+.btn-gold {
+  background: var(--color-gold-500);
+  color: #15181b;
+  box-shadow: 0 14px 32px -14px rgba(194, 154, 71, 0.65);
 }
-.btn-coral:hover {
-  background: var(--color-coral-600);
+.btn-gold:hover {
+  background: var(--color-gold-400);
   transform: translateY(-2px);
-  box-shadow: 0 18px 40px -14px rgba(249, 109, 76, 0.65);
+  box-shadow: 0 20px 42px -16px rgba(194, 154, 71, 0.7);
 }
-.btn-coral:active {
+.btn-gold:active {
   transform: translateY(0);
 }
-.btn-pine {
-  background: var(--color-pine-900);
-  color: var(--color-mint-100);
-  box-shadow: 0 12px 32px -14px rgba(10, 50, 46, 0.55);
+.btn-coal {
+  background: var(--color-coal-900);
+  color: var(--color-gold-200);
+  box-shadow: 0 14px 32px -16px rgba(15, 17, 19, 0.6);
 }
-.btn-pine:hover {
-  background: var(--color-pine-700);
+.btn-coal:hover {
+  background: var(--color-coal-950);
+  color: var(--color-gold-300);
   transform: translateY(-2px);
 }
-.btn-outline-mint {
-  border: 1.5px solid rgba(195, 232, 217, 0.4);
-  color: var(--color-mint-100);
+.btn-coal:active {
+  transform: translateY(0);
 }
-.btn-outline-mint:hover {
-  border-color: var(--color-mint-300);
-  background: rgba(195, 232, 217, 0.08);
+.btn-outline-dark {
+  border: 1.5px solid rgba(21, 24, 27, 0.22);
+  color: var(--color-coal-900);
+  background: transparent;
+}
+.btn-outline-dark:hover {
+  border-color: var(--color-gold-500);
+  background: var(--color-gold-100);
+  transform: translateY(-2px);
+}
+.btn-outline-gold {
+  border: 1.5px solid rgba(194, 154, 71, 0.45);
+  color: var(--color-gold-200);
+  background: transparent;
+}
+.btn-outline-gold:hover {
+  border-color: var(--color-gold-400);
+  background: rgba(194, 154, 71, 0.12);
   transform: translateY(-2px);
 }
 
@@ -237,7 +251,7 @@ section[id] {
   width: 100%;
   border-radius: 0.9rem;
   background: var(--color-paper);
-  border: 1px solid rgba(10, 50, 46, 0.12);
+  border: 1px solid rgba(21, 24, 27, 0.14);
   padding: 0.8rem 1rem;
   font-size: 0.9rem;
   color: var(--color-ink);
@@ -247,13 +261,13 @@ section[id] {
     background 0.25s;
 }
 .field::placeholder {
-  color: rgba(19, 37, 31, 0.42);
+  color: rgba(26, 29, 32, 0.4);
 }
 .field:focus {
   outline: none;
-  border-color: var(--color-mint-500);
+  border-color: var(--color-gold-500);
   background: var(--color-snow);
-  box-shadow: 0 0 0 4px rgba(52, 169, 140, 0.16);
+  box-shadow: 0 0 0 4px rgba(194, 154, 71, 0.18);
 }
 
 /* ---------- movimento reduzido ---------- */

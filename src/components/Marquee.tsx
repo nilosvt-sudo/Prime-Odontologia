@@ -3,16 +3,16 @@ import { SparkIcon } from "./Icons";
 export default function Marquee({
   items,
   reverse = false,
-  tone = "pine",
+  tone = "coal",
 }: {
   items: string[];
   reverse?: boolean;
-  tone?: "pine" | "coral" | "mint";
+  tone?: "coal" | "gold" | "light";
 }) {
   const tones = {
-    pine: "bg-pine-900 text-mint-200",
-    coral: "bg-coral-500 text-[#fff4ef]",
-    mint: "bg-mint-200 text-pine-800",
+    coal: "bg-coal-950 text-gold-300",
+    gold: "bg-gold-500 text-coal-950",
+    light: "bg-gold-100 text-coal-800",
   } as const;
 
   const Row = ({ hidden = false }: { hidden?: boolean }) => (

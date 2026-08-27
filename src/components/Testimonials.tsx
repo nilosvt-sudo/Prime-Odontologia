@@ -23,11 +23,11 @@ export default function Testimonials() {
   const next = () => setIdx((i) => (i + 1) % TESTIMONIALS.length);
 
   return (
-    <section id="depoimentos" className="relative overflow-hidden bg-pine-950 py-20 lg:py-28">
-      {/* arcos decorativos */}
+    <section id="depoimentos" className="relative overflow-hidden bg-coal-950 py-20 lg:py-28">
+      {/* arcos decorativos dourados */}
       <svg
         aria-hidden
-        className="pointer-events-none absolute -bottom-40 -left-24 h-[520px] w-[520px] text-mint-100/8"
+        className="pointer-events-none absolute -bottom-40 -left-24 h-[520px] w-[520px] text-gold-500/12"
         viewBox="0 0 200 200"
         fill="none"
         stroke="currentColor"
@@ -36,33 +36,37 @@ export default function Testimonials() {
           <circle key={r} cx="100" cy="100" r={r} strokeWidth="1" />
         ))}
       </svg>
+      <div
+        aria-hidden
+        className="absolute -top-40 right-[-10%] h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(194,154,71,0.12),transparent_62%)]"
+      />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
           {/* carrossel */}
           <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
             <Reveal>
-              <p className="flex items-center gap-3 text-[0.72rem] font-bold tracking-[0.24em] text-coral-400 uppercase">
-                <span className="h-px w-10 bg-coral-400" />
+              <p className="flex items-center gap-3 text-[0.72rem] font-bold tracking-[0.26em] text-gold-400 uppercase">
+                <span className="h-px w-12 bg-gold-500" />
                 Depoimentos
               </p>
-              <h2 className="font-display mt-4 text-[clamp(2rem,4.4vw,3.2rem)] leading-[1.06] font-semibold tracking-tight text-mint-100">
-                Quem sorri, <em className="font-light text-mint-300 italic">recomenda</em>.
+              <h2 className="font-display mt-4 text-[clamp(2rem,4.4vw,3.2rem)] leading-[1.06] font-semibold tracking-tight text-snow">
+                Quem sorri, <em className="font-medium text-gold-300 italic">recomenda</em>.
               </h2>
             </Reveal>
 
             <div key={idx} className="panel-in mt-10">
-              <span className="font-display block text-7xl leading-[0.4] text-coral-500/70">“</span>
-              <blockquote className="font-display mt-6 max-w-2xl text-[clamp(1.25rem,2.6vw,1.9rem)] leading-snug font-light text-mint-100 italic">
+              <span className="font-display block text-8xl leading-[0.4] text-gold-500">“</span>
+              <blockquote className="font-display mt-6 max-w-2xl text-[clamp(1.25rem,2.6vw,1.85rem)] leading-snug font-light text-snow italic">
                 {t.quote}
               </blockquote>
               <div className="mt-8 flex items-center gap-4">
-                <span className="font-display flex h-13 w-13 items-center justify-center rounded-full bg-coral-500 text-lg font-semibold text-[#fff4ef]">
+                <span className="font-display flex h-13 w-13 items-center justify-center rounded-full bg-gold-500 text-lg font-semibold text-coal-950">
                   {t.name.charAt(0)}
                 </span>
                 <span>
-                  <strong className="block text-mint-100">{t.name}</strong>
-                  <span className="text-sm text-mint-300/80">{t.treatment}</span>
+                  <strong className="block text-snow">{t.name}</strong>
+                  <span className="text-sm font-light text-gold-300/85">{t.treatment}</span>
                 </span>
               </div>
             </div>
@@ -72,14 +76,14 @@ export default function Testimonials() {
                 <button
                   onClick={prev}
                   aria-label="Depoimento anterior"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-mint-100/25 text-mint-100 transition-all duration-300 hover:border-coral-400 hover:bg-coral-500 hover:text-[#fff4ef]"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-snow/25 text-snow transition-all duration-300 hover:border-gold-500 hover:bg-gold-500 hover:text-coal-950"
                 >
                   <ArrowIcon className="h-4.5 w-4.5 rotate-180" />
                 </button>
                 <button
                   onClick={next}
                   aria-label="Próximo depoimento"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-mint-100/25 text-mint-100 transition-all duration-300 hover:border-coral-400 hover:bg-coral-500 hover:text-[#fff4ef]"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-snow/25 text-snow transition-all duration-300 hover:border-gold-500 hover:bg-gold-500 hover:text-coal-950"
                 >
                   <ArrowIcon className="h-4.5 w-4.5" />
                 </button>
@@ -91,7 +95,7 @@ export default function Testimonials() {
                     onClick={() => setIdx(i)}
                     aria-label={`Ver depoimento ${i + 1}`}
                     className={`h-2 rounded-full transition-all duration-400 ${
-                      i === idx ? "w-8 bg-coral-400" : "w-2 bg-mint-100/25 hover:bg-mint-100/50"
+                      i === idx ? "w-8 bg-gold-400" : "w-2 bg-snow/25 hover:bg-snow/50"
                     }`}
                   />
                 ))}
@@ -101,30 +105,30 @@ export default function Testimonials() {
 
           {/* resumo de avaliação */}
           <Reveal delay={150}>
-            <div className="flex h-full flex-col rounded-[2rem] border border-mint-100/12 bg-pine-900/70 p-8 lg:p-10">
-              <p className="font-display text-[5.2rem] leading-none font-semibold text-mint-100">
+            <div className="flex h-full flex-col rounded-[2rem] border border-gold-500/25 bg-coal-900 p-8 lg:p-10">
+              <p className="font-display text-[5.2rem] leading-none font-semibold text-gold-300">
                 5,0
               </p>
-              <span className="mt-3 flex gap-1 text-coral-400">
+              <span className="mt-3 flex gap-1 text-gold-400">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <StarIcon key={i} className="h-6 w-6" />
                 ))}
               </span>
-              <p className="mt-4 text-mint-200/85">
+              <p className="mt-4 font-light text-snow/70">
                 Nota máxima nas avaliações dos nossos pacientes — resultado de um cuidado
                 que trata cada sorriso como único.
               </p>
 
-              <div className="mt-8 space-y-3 border-t border-mint-100/10 pt-8">
+              <div className="mt-8 space-y-3 border-t border-snow/10 pt-8">
                 {[
                   ["Ambiente acolhedor", "nota 5,0"],
                   ["Pontualidade", "nota 5,0"],
                   ["Resultado dos tratamentos", "nota 5,0"],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-center justify-between text-sm">
-                    <span className="text-mint-200/75">{k}</span>
-                    <span className="flex items-center gap-1.5 font-semibold text-mint-100">
-                      {v} <StarIcon className="h-3.5 w-3.5 text-coral-400" />
+                    <span className="font-light text-snow/65">{k}</span>
+                    <span className="flex items-center gap-1.5 font-semibold text-snow">
+                      {v} <StarIcon className="h-3.5 w-3.5 text-gold-400" />
                     </span>
                   </div>
                 ))}
@@ -134,7 +138,7 @@ export default function Testimonials() {
                 href={CLINIC.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-outline-mint mt-auto px-6 py-3.5 text-sm"
+                className="btn btn-outline-gold mt-auto px-6 py-3.5 text-sm"
               >
                 <InstaIcon className="h-4.5 w-4.5" />
                 Ver mais no Instagram

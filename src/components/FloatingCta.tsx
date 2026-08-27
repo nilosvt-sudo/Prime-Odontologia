@@ -3,35 +3,40 @@ import { waLink } from "../config";
 import { WhatsIcon } from "./Icons";
 
 export default function FloatingCta() {
-  const [visible, setVisible] = useState(false);
+  const [show, setShow] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 480);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const id = window.setTimeout(() => setShow(true), 1800);
+    return () => window.clearTimeout(id);
   }, []);
 
+  if (!show || dismissed) return null;
+
   return (
-    <a
-      href={waLink("Olá! Quero agendar uma avaliação na Prime Odontologia. 🙂")}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Falar com a Prime Odontologia no WhatsApp"
-      className={`fixed right-5 bottom-5 z-40 flex items-center gap-3 rounded-full bg-[#1FAF57] py-3 pr-6 pl-4 text-[#f2fff7] shadow-[0_20px_45px_-15px_rgba(21,120,60,0.65)] transition-all duration-500 hover:-translate-y-1 hover:bg-[#1a9a4d] sm:right-7 sm:bottom-7 ${
-        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-16 opacity-0"
-      }`}
-    >
-      <span className="relative flex h-9 w-9 items-center justify-center">
-        <span className="animate-ping-soft absolute inset-0 rounded-full bg-[#f2fff7]/60" />
-        <WhatsIcon className="relative h-7 w-7" />
+    <div className="fixed right-5 bottom-5 z-50 flex items-center gap-3">
+      <span className="hidden items-center rounded-full border border-coal-900/15 bg-snow px-4 py-2 text-[0.72rem] font-bold text-coal-900 shadow-lg sm:flex">
+        Agende pelo WhatsApp
       </span>
-      <span className="text-sm leading-tight font-bold">
-        Agendar agora
-        <span className="block text-[0.66rem] font-medium opacity-80">
-          resposta rápida no WhatsApp
+      <a
+        href={waLink("Olá! Quero agendar uma avaliação na Prime Odontologia. 🙂")}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Conversar no WhatsApp"
+        className="group relative flex h-16 w-16 items-center justify-center"
+      >
+        <span className="animate-ping-soft absolute inset-0 rounded-full bg-gold-400/60" />
+        <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gold-500 text-coal-950 shadow-[0_18px_40px_-12px_rgba(194,154,71,0.7)] ring-1 ring-gold-300 transition-all duration-300 group-hover:scale-110 group-hover:bg-gold-400">
+          <WhatsIcon className="h-8 w-8" />
         </span>
-      </span>
-    </a>
+      </a>
+      <button
+        onClick={() => setDismissed(true)}
+        aria-label="Fechar"
+        className="flex h-7 w-7 items-center justify-center rounded-full border border-coal-900/15 bg-snow text-[0.7rem] font-bold text-coal-900 shadow transition-all hover:rotate-90 hover:border-gold-500"
+      >
+        ✕
+      </button>
+    </div>
   );
 }

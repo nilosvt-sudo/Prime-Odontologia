@@ -154,8 +154,8 @@ export const AUDIENCES: Audience[] = [
       "Próteses fixas e confortáveis",
       "Acompanhamento próximo em cada etapa",
     ],
-    img: IMG.implantes,
-    imgAlt: "Dentista realizando procedimento de implante",
+    img: IMG.reabilitacao,
+    imgAlt: "Paciente sênior sorrindo após tratamento de implante na clínica Prime Odontologia",
     cta: "Agendar avaliação de implante",
     theme: "blush",
   },
@@ -167,6 +167,9 @@ export type Testimonial = {
   quote: string;
   name: string;
   treatment: string;
+  avatar: string;
+  rating?: number;
+  timeAgo?: string;
 };
 
 export const TESTIMONIALS: Testimonial[] = [
@@ -175,30 +178,91 @@ export const TESTIMONIALS: Testimonial[] = [
       "Eu tinha vergonha de sorrir nas fotos. Fiz o clareamento na Prime e o resultado superou o que eu imaginava — sem nenhuma sensibilidade. Hoje sorrio em todas as fotos!",
     name: "Mariana Rezende",
     treatment: "Clareamento dental",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80",
+    rating: 5,
+    timeAgo: "há 2 semanas",
   },
   {
     quote:
       "Depois de anos adiando, fiz meus implantes na Prime. Fui acolhido do início ao fim, a cirurgia foi tranquila e voltei a comer de tudo. Só me arrependo de não ter feito antes.",
     name: "Carlos Eduardo",
     treatment: "Implantes dentários",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+    rating: 5,
+    timeAgo: "há 1 mês",
   },
   {
     quote:
       "Meu filho de 5 anos pede para ir ao dentista. Pede! O atendimento com as crianças é encantador, cheio de paciência e carinho. A Prime virou a clínica da nossa família.",
     name: "Fernanda & Theo",
     treatment: "Odontopediatria",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
+    rating: 5,
+    timeAgo: "há 3 semanas",
   },
   {
     quote:
       "Aos 67 anos voltei a sorrir com confiança. Fui tratada com um respeito e uma paciência que não se vê em todo lugar. Recomendo de olhos fechados para quem tem mais idade.",
     name: "Zélia Monteiro",
     treatment: "Reabilitação oral",
+    avatar: "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=200&auto=format&fit=crop&q=80",
+    rating: 5,
+    timeAgo: "há 2 meses",
   },
   {
     quote:
       "Fiz harmonização facial e o resultado ficou tão natural que todo mundo perguntou se eu tinha descansado. Profissionalismo e bom gosto do começo ao fim.",
     name: "Juliana Castro",
     treatment: "Harmonização facial",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+    rating: 5,
+    timeAgo: "há 1 mês",
+  },
+];
+
+/* ---------------- Casos Clínicos (Antes & Depois) ---------------- */
+
+export type ClinicalCase = {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  beforeImg: string;
+  afterImg: string;
+  duration: string;
+  tag: string;
+};
+
+export const BEFORE_AFTER_CASES: ClinicalCase[] = [
+  {
+    id: "clareamento-case",
+    title: "Clareamento Dental Supervisionado",
+    category: "Estética & Luminosidade",
+    description: "Remoção de pigmentos profundos e clareamento expressivo com preservação total do esmalte e conforto durante todo o protocolo.",
+    beforeImg: "/images/clareamento-antes.jpg",
+    afterImg: "/images/clareamento-depois.jpg",
+    duration: "Protocolo Prime",
+    tag: "Resultado Real",
+  },
+  {
+    id: "alinhamento-case",
+    title: "Alinhamento & Lentes Cerâmicas",
+    category: "Harmonia & Simetria",
+    description: "Fechamento de diastema e reanatomização dos dentes anteriores proporcionando um sorriso simétrico e radiante.",
+    beforeImg: "/images/lentes-antes.jpg",
+    afterImg: "/images/lentes-depois.jpg",
+    duration: "3 semanas",
+    tag: "Design Digital",
+  },
+  {
+    id: "implante-case",
+    title: "Implante & Reabilitação Oral",
+    category: "Função & Estética",
+    description: "Substituição de elemento ausente por implante com guia cirúrgica digital e coroa em porcelana pura.",
+    beforeImg: "/images/implante-antes.jpg",
+    afterImg: "/images/implante-depois.jpg",
+    duration: "Carga Imediata",
+    tag: "Cirurgia Guiada",
   },
 ];
 

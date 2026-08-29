@@ -9,15 +9,14 @@ export const CLINIC = {
   address: "Praça Dr. Vicente Bianco, nº 71 — Centro, Bicas/MG",
   epao: "EPAO 14184",
   rt: "RT: CRO-MG 55084",
-  phoneDisplay: "(32) 99999-9999",
+  phoneDisplay: "(32) 99840-1535",
   instagramUrl: "https://www.instagram.com/clinica.primeodonto/",
   instagramHandle: "@clinica.primeodonto",
   instagram: { posts: 102, followers: "1.516", following: 784 },
 };
 
-/* TODO: substitua pelo número real do WhatsApp da clínica
-   formato: 55 + DDD + número, apenas dígitos */
-export const WHATSAPP_NUMBER = "5532999999999";
+/* Número real do WhatsApp da clínica */
+export const WHATSAPP_NUMBER = "5532998401535";
 
 export const waLink = (text: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -32,6 +31,9 @@ export const MAPS_EMBED =
 export const MAPS_DIR =
   "https://www.google.com/maps/dir/?api=1&destination=Pra%C3%A7a+Dr.+Vicente+Bianco,+71+-+Bicas%2FMG";
 
+export const WAZE_DIR =
+  "https://waze.com/ul?q=Pra%C3%A7a+Dr.+Vicente+Bianco,+71+-+Bicas+MG&navigate=yes";
+
 export const HOURS = [
   { day: "Segunda a sexta", time: "08h — 18h" },
   { day: "Sábado", time: "08h — 12h (sob agendamento)" },
@@ -39,12 +41,11 @@ export const HOURS = [
 ];
 
 export const IMG = {
-  heroSmile:
-    "https://image.qwenlm.ai/generated-images/6bccda1f-a112-4d13-b64e-e94ee090fc99/_result.png",
-  implantes:
-    "https://image.qwenlm.ai/generated-images/047b8b0f-48b0-44f8-9c47-77cda7382257/_result.png",
-  clareamento:
-    "https://image.qwenlm.ai/generated-images/224d7fb3-cc44-4869-a186-16cc1726ae62/_result.png",
+  heroSmile: "/hero-image.jpg",
+  implantes: "/images/especialidades.jpg",
+  clareamento: "/images/clareamento.jpg",
+  especialidades: "/images/especialidades.jpg",
+  reabilitacao: "/images/reabilitacao-60.jpg",
   harmonizacao:
     "https://image.qwenlm.ai/generated-images/e45836e5-ecc9-4b86-8f81-767ed6f9ef8a/_result.png",
   odonto:

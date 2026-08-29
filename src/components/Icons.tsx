@@ -144,31 +144,85 @@ export const ChatIcon = (p: P) => (
   </svg>
 );
 
-/* ---------- Logomarca: dente dourado fluido e vazado ---------- */
+/* ---------- Logomarca Oficial Prime Odontologia ---------- */
 export const LogoMark = ({ className = "" }: { className?: string }) => {
   const id = useId();
   return (
-    <svg viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id={`${id}-gold`} x1="9" y1="5" x2="40" y2="45" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#EDD9A4" />
-          <stop offset="0.45" stopColor="#C29A47" />
-          <stop offset="1" stopColor="#8A6726" />
+        <linearGradient id={`${id}-gold-line`} x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#D8B568" />
+          <stop offset="40%" stopColor="#C29A47" />
+          <stop offset="100%" stopColor="#9E7628" />
         </linearGradient>
       </defs>
+      {/* Contorno do dente original estilizado */}
       <path
-        d="M24 5.8c-4.2 0-6 2.3-9 2.3-4.7 0-7.4 3.9-7 8.9.5 6.8 3.8 22.8 8.6 22.8 4 0 2.9-12.2 7.4-12.2s3.4 12.2 7.4 12.2c4.8 0 8.1-16 8.6-22.8.4-5-2.3-8.9-7-8.9-3 0-4.8-2.3-9-2.3Z"
-        stroke={`url(#${id}-gold)`}
-        strokeWidth="2.3"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17.6 14.2c1.9 2.5 4.1 3.7 6.4 3.7s4.5-1.2 6.4-3.7"
-        stroke={`url(#${id}-gold)`}
-        strokeWidth="1.3"
+        d="M 28,26 C 18,28 10,42 9,62 C 8,82 17,94 28,94 C 36,94 40,82 48,70 C 56,82 62,94 72,94 C 82,94 91,78 91,52 C 91,30 80,18 68,18 C 58,18 50,28 44,28 C 38,28 34,24 28,26 Z"
+        stroke={`url(#${id}-gold-line)`}
+        strokeWidth="4.2"
         strokeLinecap="round"
-        opacity="0.75"
+        strokeLinejoin="round"
       />
     </svg>
   );
 };
+
+/* Logomarca completa oficial: Traçado do Dente + Tipografia Prime + ODONTOLOGIA */
+export const BrandLogo = ({
+  className = "",
+  showText = true,
+  light = false,
+}: {
+  className?: string;
+  showText?: boolean;
+  light?: boolean;
+}) => {
+  const id = useId();
+  return (
+    <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
+      <svg viewBox="0 0 100 100" fill="none" className="h-10 w-10 shrink-0" aria-hidden="true">
+        <defs>
+          <linearGradient id={`${id}-brand-gold`} x1="8" y1="12" x2="92" y2="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#E5C77E" />
+            <stop offset="35%" stopColor="#C59D4A" />
+            <stop offset="70%" stopColor="#B38936" />
+            <stop offset="100%" stopColor="#8E6922" />
+          </linearGradient>
+        </defs>
+        {/* Contorno do dente original */}
+        <path
+          d="M 28,26 C 18,28 10,42 9,62 C 8,82 17,94 28,94 C 36,94 40,82 48,70 C 56,82 62,94 72,94 C 82,94 91,78 91,52 C 91,30 80,18 68,18 C 58,18 50,28 44,28 C 38,28 34,24 28,26 Z"
+          stroke={`url(#${id}-brand-gold)`}
+          strokeWidth="4.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      {showText && (
+        <span className="flex flex-col leading-none">
+          <span
+            className="font-display text-[1.65rem] font-semibold tracking-tight"
+            style={{
+              color: light ? "#FCFBF9" : "#a67f33",
+              background: light
+                ? "linear-gradient(135deg, #FFF9EB 0%, #EDD9A4 60%, #C29A47 100%)"
+                : "linear-gradient(135deg, #8E6922 0%, #B88E3E 40%, #7F5E1D 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Prime
+          </span>
+          <span
+            className="mt-0.5 text-[0.52rem] font-bold tracking-[0.38em] uppercase"
+            style={{ color: light ? "#E3CB92" : "#9E7628" }}
+          >
+            ODONTOLOGIA
+          </span>
+        </span>
+      )}
+    </div>
+  );
+};
+

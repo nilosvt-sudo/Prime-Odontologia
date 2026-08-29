@@ -1,25 +1,33 @@
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { CLINIC, waLink } from "../config";
-import { formatPt, Reveal, useCountUp, useInView } from "../hooks";
+import { formatPt, Reveal, useCountUp, useInView, usePrefersReducedMotion } from "../hooks";
 import { ArrowIcon, CalendarIcon, ChatIcon, HeartIcon, ShieldIcon, WhatsIcon } from "./Icons";
+import Magnetic from "./Magnetic";
+import SpotlightCard from "./SpotlightCard";
 
-function Stat({
-  value,
-  suffix,
-  label,
+function LiveStat({
+  target,
+  prefix = "",
+  suffix = "",
   decimals = 0,
-  start,
+  label,
+  inView,
 }: {
-  value: number;
+  target: number;
+  prefix?: string;
   suffix?: string;
-  label: string;
   decimals?: number;
-  start: boolean;
+  label: string;
+  inView: boolean;
 }) {
-  const v = useCountUp(value, start, 1900, decimals);
+  const count = useCountUp(target, inView, 1800, decimals);
+
   return (
     <div>
-      <p className="font-display text-[2.6rem] leading-none font-semibold text-gold-300 sm:text-5xl">
-        {formatPt(v, decimals)}
+      <p className="font-display text-[2.6rem] leading-none font-semibold text-gold-300 sm:text-5xl tabular-nums">
+        {prefix}
+        {formatPt(count, decimals)}
         {suffix}
       </p>
       <p className="mt-2 text-[0.72rem] font-bold tracking-[0.18em] text-snow/55 uppercase">{label}</p>
@@ -51,13 +59,24 @@ const FEATURES = [
 ];
 
 export default function About() {
-  const { ref, inView } = useInView<HTMLDivElement>(0.3);
+  const reduced = usePrefersReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { ref: statsRef, inView: statsInView } = useInView<HTMLDivElement>(0.3);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const orbY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const videoY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
 
   return (
-    <section id="clinica" className="relative overflow-hidden bg-snow py-20 lg:py-28">
-      <div
-        aria-hidden
-        className="absolute -top-32 left-[-140px] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(194,154,71,0.14),transparent_62%)]"
+    <section ref={sectionRef} id="clinica" className="relative overflow-hidden bg-snow py-20 lg:py-28">
+      <motion.div
+        style={reduced ? undefined : { y: orbY }}
+        aria-hidden="true"
+        className="absolute -top-32 left-[-140px] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(194,154,71,0.18),transparent_62%)] pointer-events-none"
       />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid items-start gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
@@ -90,40 +109,70 @@ export default function About() {
               </div>
             </Reveal>
 
-            {/* painel de números */}
+            {/* painel de números reais com Live Counters e Spotlight */}
             <Reveal delay={200}>
-              <div
-                ref={ref}
-                className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 rounded-[2rem] bg-coal-950 p-8 shadow-[0_45px_90px_-45px_rgba(15,17,19,0.7)] sm:grid-cols-4 sm:p-10"
-              >
-                <Stat value={1500} suffix="+" label="Sorrisos transformados" start={inView} />
-                <Stat value={5} decimals={1} suffix=",0" label="Nota dos pacientes" start={inView} />
-                <Stat value={4} label="Especialidades" start={inView} />
-                <Stat value={100} suffix="%" label="Foco em você" start={inView} />
+              <div ref={statsRef}>
+                <SpotlightCard
+                  spotlightColor="rgba(194, 154, 71, 0.25)"
+                  className="mt-10 rounded-[2rem] bg-coal-950 p-8 shadow-[0_45px_90px_-45px_rgba(15,17,19,0.7)] sm:p-10"
+                >
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
+                    <LiveStat
+                      target={1500}
+                      suffix="+"
+                      label="Sorrisos transformados"
+                      inView={statsInView}
+                    />
+                    <LiveStat
+                      target={5.0}
+                      decimals={1}
+                      label="Nota dos pacientes"
+                      inView={statsInView}
+                    />
+                    <LiveStat
+                      target={4}
+                      label="Especialidades"
+                      inView={statsInView}
+                    />
+                    <LiveStat
+                      target={100}
+                      suffix="%"
+                      label="Foco em você"
+                      inView={statsInView}
+                    />
+                  </div>
+                </SpotlightCard>
               </div>
             </Reveal>
           </div>
 
-          {/* foto + diferenciais */}
+          {/* foto + diferenciais com parallax */}
           <div className="lg:pt-6">
             <Reveal delay={140}>
-              <div className="relative">
+              <motion.div style={reduced ? undefined : { y: videoY }} className="relative">
                 <div
-                  aria-hidden
+                  aria-hidden="true"
                   className="absolute inset-0 -translate-x-4 translate-y-4 rounded-[2.2rem] border border-gold-500/50"
                 />
-                <div className="relative overflow-hidden rounded-[2.2rem] shadow-[0_50px_100px_-45px_rgba(15,17,19,0.55)]">
-                  <img
-                    src="https://image.qwenlm.ai/generated-images/31270cc3-e5bd-49da-9fde-76df8fb0ad26/_result.png"
-                    alt="Recepção da Prime Odontologia em Bicas/MG"
-                    loading="lazy"
-                    className="animate-breathe aspect-[4/3] w-full object-cover"
-                  />
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2.2rem] shadow-[0_50px_100px_-45px_rgba(15,17,19,0.55)]">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    poster="https://image.qwenlm.ai/generated-images/31270cc3-e5bd-49da-9fde-76df8fb0ad26/_result.png"
+                    className="w-full h-full object-cover rounded-3xl"
+                    aria-label="Tour institucional pela Prime Odontologia em Bicas/MG"
+                  >
+                    <source src="/videos/tour-clinica-prime.mp4" type="video/mp4" />
+                    Seu navegador não suporta a tag de vídeo.
+                  </video>
                 </div>
-                <div className="absolute -bottom-5 right-6 rounded-full border border-coal-900/65 bg-snow px-5 py-2.5 text-[0.7rem] font-bold tracking-[0.14em] text-coal-950 uppercase shadow-lg">
-                  {CLINIC.city} · MG
+                <div className="absolute -bottom-5 right-6 rounded-full border border-coal-900/65 bg-snow px-5 py-2.5 text-[0.7rem] font-bold tracking-[0.14em] text-coal-950 uppercase shadow-lg z-10">
+                  BICAS · MG
                 </div>
-              </div>
+              </motion.div>
             </Reveal>
 
             <div className="mt-12 space-y-4">
@@ -147,16 +196,20 @@ export default function About() {
             </div>
 
             <Reveal delay={200}>
-              <a
-                href={waLink("Olá! Quero conhecer a Prime Odontologia e agendar uma avaliação.")}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-gold mt-8 px-7 py-3.5 text-sm"
-              >
-                <WhatsIcon className="h-4.5 w-4.5" />
-                Venha nos conhecer
-                <ArrowIcon className="h-4 w-4" />
-              </a>
+              <Magnetic>
+                <motion.a
+                  whileHover={reduced ? undefined : { scale: 1.02 }}
+                  whileTap={reduced ? undefined : { scale: 0.98 }}
+                  href={waLink("Olá! Quero conhecer a Prime Odontologia e agendar uma avaliação.")}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-gold mt-8 px-7 py-3.5 text-sm cursor-pointer flex items-center gap-2"
+                >
+                  <WhatsIcon className="h-4.5 w-4.5" />
+                  Venha nos conhecer
+                  <ArrowIcon className="h-4 w-4" />
+                </motion.a>
+              </Magnetic>
             </Reveal>
           </div>
         </div>

@@ -1,16 +1,20 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 
 /* Detecta preferência por movimento reduzido */
 export function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
+  const reduced = useReducedMotion();
+  const [matches, setMatches] = useState(Boolean(reduced));
+
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    setMatches(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
-  return reduced;
+
+  return matches;
 }
 
 /* Observa quando um elemento entra na viewport (uma única vez) */
@@ -39,7 +43,32 @@ export function useInView<T extends HTMLElement>(threshold = 0.18) {
   return { ref, inView };
 }
 
-/* Wrapper de revelação no scroll */
+/* Variantes padrão do Motion para animações reutilizáveis */
+export const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (customDelay: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      delay: customDelay / 1000,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+export const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+/* Wrapper de revelação no scroll com Motion acelerado por GPU */
 export function Reveal({
   children,
   delay = 0,
@@ -49,15 +78,23 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const shouldReduce = usePrefersReducedMotion();
+
+  if (shouldReduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
-    <div
-      ref={ref}
-      className={`reveal ${inView ? "in-view" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <motion.div
+      variants={fadeUpVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-40px" }}
+      custom={delay}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 

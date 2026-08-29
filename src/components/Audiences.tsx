@@ -108,14 +108,13 @@ export default function Audiences() {
                     </a>
                   </div>
 
-                  <div className="relative min-h-[280px] overflow-hidden md:min-h-[460px]">
+                  <div className="relative h-full min-h-[320px] w-full overflow-hidden md:min-h-[440px]">
                     <img
                       src={a.img}
                       alt={a.imgAlt}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.6s] ease-out hover:scale-[1.06]"
+                      className="h-full w-full object-cover object-center"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-r ${t.overlay} via-transparent to-transparent`} />
                   </div>
                 </article>
               </div>

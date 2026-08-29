@@ -1,20 +1,53 @@
+import { motion } from "motion/react";
 import { CLINIC } from "../config";
 import { SERVICES } from "../data";
-import { formatPt, Reveal, useCountUp, useInView } from "../hooks";
+import { formatPt, Reveal, useCountUp, useInView, usePrefersReducedMotion } from "../hooks";
 import { HeartIcon, InstaIcon, StarIcon } from "./Icons";
+import Magnetic from "./Magnetic";
+import SpotlightCard from "./SpotlightCard";
 
-function Stat({ value, label, start }: { value: number; label: string; start: boolean }) {
-  const v = useCountUp(value, start, 1600);
+function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <p className="font-display text-3xl font-semibold text-snow">{formatPt(v)}</p>
+      <p className="font-display text-2xl sm:text-3xl font-semibold text-snow">{value}</p>
       <p className="mt-1 text-[0.66rem] font-bold tracking-[0.18em] text-snow/50 uppercase">{label}</p>
     </div>
   );
 }
 
+const INSTA_POSTS = [
+  {
+    id: "dra-rafaela",
+    img: "/images/insta-1.jpg",
+    title: "Dra. Rafaela Martins",
+    subtitle: "Clínico Adulto · Cirurgia · Canal · Prótese",
+    likes: "280+",
+  },
+  {
+    id: "dra-barbara",
+    img: "/images/insta-2.jpg",
+    title: "Dra. Bárbara Azzi",
+    subtitle: "Ortodontia · Atendimento Infantil · Cirurgia",
+    likes: "340+",
+  },
+  {
+    id: "dra-marcileia",
+    img: "/images/insta-3.jpg",
+    title: "Dra. Marciléia Ribeiro",
+    subtitle: "Bucomaxilofacial · Implantodontia · Prótese",
+    likes: "410+",
+  },
+  {
+    id: "equipe-prime",
+    img: "/images/insta-4.jpg",
+    title: "Equipe Prime Odontologia",
+    subtitle: "Dia do Amigo · Cuidado e Alegria no Atendimento",
+    likes: "520+",
+  },
+];
+
 export default function Instagram() {
-  const { ref, inView } = useInView<HTMLDivElement>(0.3);
+  const reduced = usePrefersReducedMotion();
 
   return (
     <section id="instagram" className="relative bg-paper py-20 lg:py-28">
@@ -27,101 +60,85 @@ export default function Instagram() {
               Nas redes
             </p>
             <h2 className="font-display mt-4 text-[clamp(2rem,4.4vw,3.2rem)] leading-[1.06] font-semibold tracking-tight text-coal-950">
-              Acompanhe o dia a dia
-              <em className="font-medium text-gold-600 italic"> no Instagram</em>.
+              Acompanhe o dia a dia{" "}
+              <em className="font-medium text-gold-600 italic">no Instagram.</em>
             </h2>
             <p className="mt-4 max-w-md font-light text-ink/65">
-              Bastidores da clínica, resultados reais, dicas de saúde bucal para todas as
-              idades e novidades de harmonização facial.
+              Conheça nossas especialistas, bastidores da clínica, resultados reais e dicas de saúde bucal para toda a sua família.
             </p>
 
-            <div
-              ref={ref}
-              className="mt-8 flex flex-col gap-8 rounded-[2rem] bg-coal-950 p-8 shadow-[0_45px_90px_-45px_rgba(15,17,19,0.7)]"
+            <SpotlightCard
+              spotlightColor="rgba(194, 154, 71, 0.22)"
+              className="mt-8 rounded-[2rem] bg-coal-950 p-8 shadow-[0_45px_90px_-45px_rgba(15,17,19,0.7)]"
             >
-              <div className="flex items-center gap-5">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold-500 ring-2 ring-gold-300 ring-offset-4 ring-offset-coal-950">
-                  <span className="font-display text-2xl font-bold text-coal-950">P</span>
-                </span>
-                <div>
-                  <p className="font-display text-xl font-semibold text-snow">Prime Odontologia</p>
-                  <p className="text-sm font-light text-gold-300">{CLINIC.instagramHandle}</p>
+              <div className="flex flex-col gap-8">
+                <div className="flex items-center gap-5">
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold-500 ring-2 ring-gold-300 ring-offset-4 ring-offset-coal-950">
+                    <span className="font-display text-2xl font-bold text-coal-950">P</span>
+                  </span>
+                  <div>
+                    <p className="font-display text-xl font-semibold text-snow">Prime Odontologia</p>
+                    <p className="text-sm font-light text-gold-300">{CLINIC.instagramHandle}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-3 gap-4 border-t border-snow/10 pt-7">
-                <Stat value={102} label="Publicações" start={inView} />
-                <Stat value={1516} label="Seguidores" start={inView} />
-                <Stat value={784} label="Seguindo" start={inView} />
-              </div>
+                <div className="grid grid-cols-3 gap-4 border-t border-snow/10 pt-7 text-center">
+                  <Stat value="102" label="Publicações" />
+                  <Stat value="1.516" label="Seguidores" />
+                  <Stat value="784" label="Seguindo" />
+                </div>
 
-              <a
-                href={CLINIC.instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-gold w-full px-6 py-3.5 text-sm"
-              >
-                <InstaIcon className="h-4.5 w-4.5" />
-                Seguir {CLINIC.instagramHandle}
-              </a>
-            </div>
+                <Magnetic className="w-full">
+                  <motion.a
+                    whileHover={reduced ? undefined : { scale: 1.02 }}
+                    whileTap={reduced ? undefined : { scale: 0.98 }}
+                    href={CLINIC.instagramUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-gold w-full px-6 py-3.5 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <InstaIcon className="h-4.5 w-4.5" />
+                    Seguir {CLINIC.instagramHandle}
+                  </motion.a>
+                </Magnetic>
+              </div>
+            </SpotlightCard>
           </Reveal>
 
-          {/* mosaico do feed */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
-            {SERVICES.map((s, i) => (
-              <Reveal key={s.id} delay={i * 100} className={i === 0 ? "col-span-2 sm:col-span-1" : ""}>
+          {/* mosaico do feed com os 4 posts reais */}
+          <div className="grid grid-cols-2 gap-4 sm:gap-5">
+            {INSTA_POSTS.map((post, i) => (
+              <Reveal key={post.id} delay={i * 100}>
                 <a
                   href={CLINIC.instagramUrl}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`Ver publicação sobre ${s.name} no Instagram`}
-                  className={`group relative block overflow-hidden rounded-2xl bg-snow p-2.5 ring-1 ring-coal-900/10 transition-all duration-500 hover:-translate-y-1.5 hover:ring-gold-500/70 hover:shadow-[0_30px_60px_-30px_rgba(15,17,19,0.5)] ${
-                    i === 0 ? "aspect-[2.15/1] sm:aspect-[4/5]" : "aspect-[4/5]"
-                  }`}
+                  aria-label={`Ver publicação de ${post.title} no Instagram`}
+                  className="group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-snow p-2 ring-1 ring-coal-900/10 shadow-[0_20px_45px_-20px_rgba(15,17,19,0.3)] transition-all duration-500 hover:-translate-y-1.5 hover:ring-gold-500/70 hover:shadow-[0_30px_60px_-25px_rgba(15,17,19,0.5)]"
                 >
                   <img
-                    src={s.img}
-                    alt=""
+                    src={post.img}
+                    alt={post.title}
                     loading="lazy"
-                    className="absolute inset-2.5 h-[calc(100%-1.25rem)] w-[calc(100%-1.25rem)] rounded-xl object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-full w-full rounded-xl object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute inset-2.5 flex items-end rounded-xl bg-gradient-to-t from-coal-950/80 via-coal-950/10 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                    <span className="flex items-center gap-2 text-[0.8rem] font-semibold text-snow">
-                      <span className="flex gap-2.5">
-                        <span className="flex items-center gap-1">
-                          <HeartIcon className="h-4 w-4 text-gold-300" /> 240+
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <StarIcon className="h-3.5 w-3.5 text-gold-300" /> {s.name}
-                        </span>
-                      </span>
+                  <span className="absolute inset-2 flex flex-col justify-end rounded-xl bg-gradient-to-t from-coal-950/85 via-coal-950/20 to-transparent p-3.5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                    <span className="font-display text-sm font-semibold text-snow">
+                      {post.title}
+                    </span>
+                    <span className="text-[0.68rem] text-gold-300 font-light line-clamp-1">
+                      {post.subtitle}
+                    </span>
+                    <span className="mt-1.5 flex items-center gap-1.5 text-[0.72rem] font-semibold text-snow/90">
+                      <HeartIcon className="h-3.5 w-3.5 text-gold-400" /> {post.likes}
                     </span>
                   </span>
-                  <span className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-full border border-coal-900/60 bg-snow text-gold-600 opacity-0 transition-all duration-500 group-hover:opacity-100">
-                    <InstaIcon className="h-4 w-4" />
+                  <span className="absolute top-4 right-4 flex h-7 w-7 items-center justify-center rounded-full border border-coal-900/60 bg-snow text-gold-600 opacity-0 transition-all duration-500 group-hover:opacity-100">
+                    <InstaIcon className="h-3.5 w-3.5" />
                   </span>
                 </a>
               </Reveal>
             ))}
-
-            {/* tile dourado — convite */}
-            <Reveal delay={420}>
-              <a
-                href={CLINIC.instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex aspect-[4/5] flex-col items-center justify-center gap-4 rounded-2xl bg-coal-950 p-6 text-center ring-1 ring-gold-500/30 transition-all duration-500 hover:-translate-y-1.5 hover:ring-gold-500/80"
-              >
-                <InstaIcon className="h-9 w-9 text-gold-400 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6" />
-                <span className="font-display text-lg leading-snug font-medium text-snow italic">
-                  +100 posts com resultados reais
-                </span>
-                <span className="rounded-full border border-gold-500/50 px-4 py-1.5 text-[0.68rem] font-bold tracking-[0.16em] text-gold-300 uppercase">
-                  Ver o feed completo
-                </span>
-              </a>
-            </Reveal>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { CLINIC } from "../config";
 import { TESTIMONIALS } from "../data";
 import { Reveal, usePrefersReducedMotion } from "../hooks";
@@ -51,53 +52,103 @@ export default function Testimonials() {
                 Depoimentos
               </p>
               <h2 className="font-display mt-4 text-[clamp(2rem,4.4vw,3.2rem)] leading-[1.06] font-semibold tracking-tight text-snow">
-                Quem sorri, <em className="font-medium text-gold-300 italic">recomenda</em>.
+                Quem sorri, <em className="font-medium text-gold-300 italic">recomenda.</em>
               </h2>
             </Reveal>
 
-            <div key={idx} className="panel-in mt-10">
-              <span className="font-display block text-8xl leading-[0.4] text-gold-500">“</span>
-              <blockquote className="font-display mt-6 max-w-2xl text-[clamp(1.25rem,2.6vw,1.85rem)] leading-snug font-light text-snow italic">
-                {t.quote}
-              </blockquote>
-              <div className="mt-8 flex items-center gap-4">
-                <span className="font-display flex h-13 w-13 items-center justify-center rounded-full bg-gold-500 text-lg font-semibold text-coal-950">
-                  {t.name.charAt(0)}
-                </span>
-                <span>
-                  <strong className="block text-snow">{t.name}</strong>
-                  <span className="text-sm font-light text-gold-300/85">{t.treatment}</span>
-                </span>
-              </div>
+            <div className="relative min-h-[260px] mt-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={idx}
+                  initial={reduced ? undefined : { opacity: 0, x: 20 }}
+                  animate={reduced ? undefined : { opacity: 1, x: 0 }}
+                  exit={reduced ? undefined : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="flex items-center gap-1.5 text-gold-400">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <StarIcon key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                    <span className="ml-2 text-xs font-semibold text-gold-300">5.0 · Avaliação Verificada</span>
+                  </div>
+
+                  <blockquote className="font-display mt-5 max-w-2xl text-[clamp(1.15rem,2.4vw,1.75rem)] leading-snug font-light text-snow italic">
+                    “{t.quote}”
+                  </blockquote>
+
+                  {/* Paciente com foto e detalhes */}
+                  <div className="mt-7 flex items-center gap-4">
+                    <div className="relative">
+                      <img
+                        src={t.avatar}
+                        alt={t.name}
+                        className="h-14 w-14 rounded-full border-2 border-gold-400 object-cover shadow-lg"
+                      />
+                      <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[0.6rem] font-bold text-white ring-2 ring-coal-950">
+                        ✓
+                      </span>
+                    </div>
+                    <div>
+                      <strong className="block text-base font-semibold text-snow">{t.name}</strong>
+                      <div className="flex items-center gap-2 text-xs font-light text-gold-300/85">
+                        <span>{t.treatment}</span>
+                        {t.timeAgo && (
+                          <>
+                            <span>•</span>
+                            <span className="text-snow/50">{t.timeAgo}</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            <div className="mt-10 flex items-center gap-5">
-              <div className="flex gap-3">
-                <button
+            {/* Navegação e miniaturas dos pacientes com fotos */}
+            <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-6">
+              <div className="flex gap-2">
+                <motion.button
+                  whileHover={reduced ? undefined : { scale: 1.1 }}
+                  whileTap={reduced ? undefined : { scale: 0.92 }}
                   onClick={prev}
                   aria-label="Depoimento anterior"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-snow/25 text-snow transition-all duration-300 hover:border-gold-500 hover:bg-gold-500 hover:text-coal-950"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-snow/25 text-snow transition-colors duration-300 hover:border-gold-500 hover:bg-gold-500 hover:text-coal-950 cursor-pointer"
                 >
-                  <ArrowIcon className="h-4.5 w-4.5 rotate-180" />
-                </button>
-                <button
+                  <ArrowIcon className="h-4 w-4 rotate-180" />
+                </motion.button>
+                <motion.button
+                  whileHover={reduced ? undefined : { scale: 1.1 }}
+                  whileTap={reduced ? undefined : { scale: 0.92 }}
                   onClick={next}
                   aria-label="Próximo depoimento"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-snow/25 text-snow transition-all duration-300 hover:border-gold-500 hover:bg-gold-500 hover:text-coal-950"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-snow/25 text-snow transition-colors duration-300 hover:border-gold-500 hover:bg-gold-500 hover:text-coal-950 cursor-pointer"
                 >
-                  <ArrowIcon className="h-4.5 w-4.5" />
-                </button>
+                  <ArrowIcon className="h-4 w-4" />
+                </motion.button>
               </div>
-              <div className="flex gap-2">
-                {TESTIMONIALS.map((_, i) => (
-                  <button
+
+              {/* Miniaturas com fotos dos pacientes */}
+              <div className="flex items-center gap-2.5">
+                {TESTIMONIALS.map((item, i) => (
+                  <motion.button
                     key={i}
+                    whileHover={reduced ? undefined : { scale: 1.15 }}
+                    whileTap={reduced ? undefined : { scale: 0.95 }}
                     onClick={() => setIdx(i)}
-                    aria-label={`Ver depoimento ${i + 1}`}
-                    className={`h-2 rounded-full transition-all duration-400 ${
-                      i === idx ? "w-8 bg-gold-400" : "w-2 bg-snow/25 hover:bg-snow/50"
+                    aria-label={`Ver depoimento de ${item.name}`}
+                    className={`group relative transition-all duration-300 cursor-pointer ${
+                      i === idx
+                        ? "scale-110 ring-2 ring-gold-400 ring-offset-2 ring-offset-coal-950 rounded-full"
+                        : "opacity-45 hover:opacity-100 rounded-full"
                     }`}
-                  />
+                  >
+                    <img
+                      src={item.avatar}
+                      alt={item.name}
+                      className="h-9 w-9 rounded-full object-cover"
+                    />
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -134,15 +185,17 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <a
+              <motion.a
+                whileHover={reduced ? undefined : { scale: 1.03 }}
+                whileTap={reduced ? undefined : { scale: 0.97 }}
                 href={CLINIC.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-outline-gold mt-auto px-6 py-3.5 text-sm"
+                className="btn btn-outline-gold mt-auto px-6 py-3.5 text-sm cursor-pointer"
               >
                 <InstaIcon className="h-4.5 w-4.5" />
                 Ver mais no Instagram
-              </a>
+              </motion.a>
             </div>
           </Reveal>
         </div>

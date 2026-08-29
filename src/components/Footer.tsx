@@ -1,5 +1,6 @@
 import { CLINIC, waLink } from "../config";
 import { SERVICES } from "../data";
+import { openBookingModal } from "./BookingModal";
 import { ArrowIcon, InstaIcon, LogoMark, PinIcon, WhatsIcon } from "./Icons";
 
 const NAV = [
@@ -19,8 +20,8 @@ export default function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 py-16 lg:flex-row lg:items-center">
           <div>
             <p className="font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.08] font-semibold tracking-tight text-snow">
-              Pronto para o seu
-              <em className="font-medium text-gold-300 italic"> sorriso padrão ouro</em>?
+              Pronto para o seu{" "}
+              <em className="font-medium text-gold-300 italic">sorriso padrão ouro?</em>
             </p>
             <p className="mt-3 max-w-lg font-light text-snow/60">
               Agende uma avaliação e receba um plano de tratamento pensado para o seu
@@ -37,10 +38,14 @@ export default function Footer() {
               <WhatsIcon className="h-5 w-5" />
               Agendar agora
             </a>
-            <a href="#agendar" className="btn btn-outline-gold px-8 py-4 text-[0.95rem]">
+            <button
+              onClick={() => openBookingModal()}
+              type="button"
+              className="btn btn-outline-gold px-8 py-4 text-[0.95rem] cursor-pointer"
+            >
               Preencher formulário
               <ArrowIcon className="h-4 w-4 rotate-[-90deg]" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -48,14 +53,16 @@ export default function Footer() {
       {/* colunas */}
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
         <div>
-          <a href="#inicio" className="group flex items-center gap-3">
-            <LogoMark className="h-12 w-12 transition-transform duration-500 group-hover:rotate-[-6deg]" />
-            <span className="leading-none">
-              <span className="font-display block text-2xl font-semibold text-snow">Prime</span>
-              <span className="mt-1 block text-[0.58rem] font-bold tracking-[0.34em] text-gold-300 uppercase">
-                Odontologia
-              </span>
-            </span>
+          <a
+            href="#inicio"
+            aria-label="PRIME ODONTOLOGIA - Início"
+            className="inline-flex items-center rounded-2xl bg-white p-4 sm:p-5 shadow-[0_14px_36px_-8px_rgba(0,0,0,0.6)] ring-2 ring-gold-500/50 transition-all duration-300 hover:scale-105 hover:ring-gold-400 hover:shadow-[0_18px_44px_-8px_rgba(194,154,71,0.35)]"
+          >
+            <img
+              src="/logo-prime-odontologia.png"
+              alt="PRIME ODONTOLOGIA"
+              className="h-16 sm:h-20 w-auto object-contain drop-shadow"
+            />
           </a>
           <p className="mt-5 max-w-xs text-sm leading-relaxed font-light text-snow/55">
             Harmonização facial · Odontopediatria · Implantes · Clareamento. Odontologia
@@ -145,14 +152,14 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* barra legal */}
-      <div className="border-t border-gold-500/15">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-center text-xs font-light text-snow/45 sm:flex-row sm:text-left">
+      {/* barra legal com margem de segurança para o botão flutuante */}
+      <div className="border-t border-gold-500/15 pt-6 pb-32 sm:pb-36 lg:pb-32">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 text-center text-xs font-light text-snow/45 sm:flex-row sm:text-left">
           <p>
             © {new Date().getFullYear()} {CLINIC.name} — Todos os direitos reservados.
           </p>
-          <p className="flex items-center gap-2">
-            Feito com <span className="text-gold-400">♦</span> em {CLINIC.city} · Minas Gerais
+          <p className="flex items-center gap-1.5">
+            Feito com <span className="inline-block text-sm text-red-500 animate-pulse">❤️</span> em {CLINIC.city} · Minas Gerais
           </p>
         </div>
       </div>

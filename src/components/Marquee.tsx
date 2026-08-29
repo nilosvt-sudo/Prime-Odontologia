@@ -29,9 +29,10 @@ export default function Marquee({
   );
 
   return (
-    <div className={`overflow-hidden py-4 ${tones[tone]}`}>
+    <div className={`w-full overflow-hidden py-4.5 ${tones[tone]}`}>
       <div className={`marquee-track ${reverse ? "reverse" : ""}`}>
         <Row />
+        <Row hidden />
         <Row hidden />
       </div>
     </div>

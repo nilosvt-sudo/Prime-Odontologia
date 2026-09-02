@@ -23,7 +23,7 @@ export default function FloatingCta() {
           animate={reduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
           exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.8, y: 20 }}
           transition={{ type: "spring", stiffness: 320, damping: 22 }}
-          className="fixed right-4 bottom-4 z-40 flex items-center gap-2.5 sm:right-6 sm:bottom-6 md:right-8 md:bottom-8"
+          className="fixed right-4 bottom-6 z-50 flex items-center gap-2.5 sm:right-6 sm:bottom-6 md:right-8 md:bottom-8"
         >
           <motion.span
             initial={reduced ? undefined : { opacity: 0, x: 10 }}

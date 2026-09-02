@@ -199,12 +199,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Coluna direita — Imagem sem distorção ou corte, alinhada à base com cabeça inteira visível */}
-      <div className="order-last lg:order-2 relative w-full lg:w-1/2 h-full min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-end justify-center lg:justify-end overflow-hidden self-stretch pt-0 mt-0 pb-0 mb-0">
+      {/* Coluna direita — Preenche o quadrante direito de cima a baixo, puxada para a esquerda */}
+      <div className="order-last lg:order-2 w-full lg:w-1/2 h-full relative overflow-hidden self-stretch flex justify-start items-end p-0 m-0">
         <img
           src="/hero-sorriso.jpg"
           alt="Sorriso radiante — Prime Odontologia"
-          className="w-auto h-full max-h-[520px] sm:max-h-[580px] lg:max-h-[620px] object-contain object-bottom block align-bottom mx-auto lg:mx-0 lg:ml-auto drop-shadow-none !filter-none select-none"
+          className="w-auto h-full max-h-[100%] min-h-[580px] lg:min-h-full block align-bottom object-cover object-bottom lg:-ml-[50px] drop-shadow-none !filter-none select-none"
         />
         {/* Fusão suave de estúdio com o fundo do site na lateral esquerda */}
         <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-paper via-paper/40 to-transparent pointer-events-none hidden lg:block z-10" />

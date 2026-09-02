@@ -208,11 +208,11 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Imagem da mulher no Desktop — Cobertura lateral absoluta preenchendo 100% de cima a baixo */}
+      {/* Imagem da mulher no Desktop — Posicionada à direita e centralizada no quadrante */}
       <img
         src="/hero-sorriso.png"
         alt="Sorriso radiante — Prime Odontologia"
-        className="hidden lg:block absolute right-0 bottom-0 top-0 w-1/2 h-full object-cover object-[center_top] pointer-events-none z-0 drop-shadow-2xl !filter-none select-none"
+        className="hidden lg:block absolute right-0 xl:right-6 bottom-0 top-0 w-[46%] xl:w-[48%] h-full object-contain object-bottom pointer-events-none z-0 drop-shadow-2xl !filter-none select-none"
       />
     </section>
   );

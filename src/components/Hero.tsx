@@ -199,15 +199,15 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Coluna direita — Traz a mulher mais para a esquerda, preenchendo o vão central */}
-      <div className="order-last lg:order-2 w-full lg:w-[50%] xl:w-[52%] self-stretch relative flex items-end justify-start overflow-hidden pt-0 mt-0 pb-0 mb-0 min-h-[480px] lg:min-h-full">
+      {/* Coluna direita — Mulher bem enquadrada vindo da direita com transição suave para o texto */}
+      <div className="order-last lg:order-2 w-full lg:w-[50%] xl:w-[52%] self-stretch relative flex justify-end items-end overflow-hidden pt-0 mt-0 pb-0 mb-0 min-h-[480px] lg:min-h-full">
         <img
           src="/hero-sorriso.jpg"
           alt="Sorriso radiante — Prime Odontologia"
-          className="lg:absolute lg:top-0 lg:bottom-0 lg:left-0 w-full h-full min-w-[550px] lg:min-w-[650px] object-cover object-[35%_center] block mb-0 align-bottom drop-shadow-none !filter-none select-none"
+          className="lg:absolute lg:top-0 lg:bottom-0 lg:right-0 w-full h-full min-w-[550px] lg:min-w-[650px] object-cover object-[75%_top] block mb-0 align-bottom drop-shadow-none !filter-none select-none"
         />
         {/* Fusão suave de estúdio com o fundo do site na lateral esquerda */}
-        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-paper via-paper/30 to-transparent pointer-events-none hidden lg:block z-10" />
+        <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-paper via-paper/40 to-transparent pointer-events-none hidden lg:block z-10" />
       </div>
     </section>
   );

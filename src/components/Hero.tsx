@@ -30,7 +30,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="inicio"
-      className="relative flex flex-col lg:flex-row items-stretch justify-between overflow-hidden bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0 lg:min-h-[calc(100vh-64px)]"
+      className="relative flex flex-col lg:flex-row items-stretch justify-between gap-4 lg:gap-6 overflow-hidden bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0 lg:min-h-[calc(100vh-64px)]"
     >
       {/* Atmosfera: brilho dourado suave no topo esquerdo */}
       <motion.div
@@ -53,7 +53,7 @@ export default function Hero() {
       </p>
 
       {/* Coluna esquerda — Textos e Agendamento */}
-      <div className="flex-1 flex items-center justify-center lg:justify-end px-6 sm:px-8 lg:pl-12 lg:pr-4 xl:pr-6 pt-6 sm:pt-8 lg:pt-20 pb-14 sm:pb-16 lg:pb-12 z-10">
+      <div className="flex-1 flex items-center justify-center lg:justify-end px-6 sm:px-8 lg:pl-12 lg:pr-2 xl:pr-4 pt-6 sm:pt-8 lg:pt-20 pb-14 sm:pb-16 lg:pb-12 z-10">
         <motion.div
           initial={reduced ? undefined : { opacity: 0, y: 20 }}
           animate={reduced ? undefined : { opacity: 1, y: 0 }}
@@ -199,15 +199,15 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Coluna direita — Ocupa 100% da altura da navbar até a faixa preta */}
-      <div className="order-last lg:order-2 w-full lg:w-1/2 self-stretch relative flex flex-col justify-end items-center lg:items-end overflow-hidden pt-0 mt-0 pb-0 mb-0 min-h-[480px] lg:min-h-full">
+      {/* Coluna direita — Traz a mulher mais para a esquerda, preenchendo o vão central */}
+      <div className="order-last lg:order-2 w-full lg:w-[50%] xl:w-[52%] self-stretch relative flex items-end justify-start overflow-hidden pt-0 mt-0 pb-0 mb-0 min-h-[480px] lg:min-h-full">
         <img
           src="/hero-sorriso.jpg"
           alt="Sorriso radiante — Prime Odontologia"
-          className="lg:absolute lg:top-0 lg:bottom-0 lg:right-0 w-full lg:w-auto h-full min-h-[480px] lg:min-h-full object-cover object-top block mb-0 align-bottom drop-shadow-none !filter-none select-none"
+          className="lg:absolute lg:top-0 lg:bottom-0 lg:left-0 w-full h-full min-w-[550px] lg:min-w-[650px] object-cover object-[35%_center] block mb-0 align-bottom drop-shadow-none !filter-none select-none"
         />
         {/* Fusão suave de estúdio com o fundo do site na lateral esquerda */}
-        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-paper via-paper/30 to-transparent pointer-events-none hidden lg:block z-10" />
+        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-paper via-paper/30 to-transparent pointer-events-none hidden lg:block z-10" />
       </div>
     </section>
   );

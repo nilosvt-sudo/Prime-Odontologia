@@ -30,7 +30,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="inicio"
-      className="relative flex flex-col lg:flex-row items-stretch justify-between gap-y-4 lg:gap-y-0 lg:gap-x-6 overflow-hidden bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0 lg:min-h-[calc(100vh-64px)]"
+      className="relative flex flex-col lg:flex-row items-stretch justify-between overflow-hidden bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0 lg:min-h-[calc(100vh-64px)]"
     >
       {/* Atmosfera: brilho dourado suave no topo esquerdo */}
       <motion.div
@@ -53,7 +53,7 @@ export default function Hero() {
       </p>
 
       {/* Coluna esquerda — Textos e Agendamento */}
-      <div className="flex-1 flex items-center justify-center lg:justify-end px-6 sm:px-8 lg:pl-12 lg:pr-2 xl:pr-4 pt-6 sm:pt-8 lg:pt-20 pb-4 sm:pb-6 lg:pb-12 z-10">
+      <div className="flex-1 flex items-center justify-center lg:justify-end px-6 sm:px-8 lg:pl-12 lg:pr-4 xl:pr-6 pt-6 sm:pt-8 lg:pt-20 pb-4 sm:pb-6 lg:pb-12 z-10">
         <motion.div
           initial={reduced ? undefined : { opacity: 0, y: 20 }}
           animate={reduced ? undefined : { opacity: 1, y: 0 }}
@@ -199,12 +199,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Coluna direita — No mobile logo abaixo das avaliações sem vão; no desktop vindo da direita com transição suave */}
-      <div className="order-last lg:order-2 w-full lg:w-[50%] xl:w-[52%] self-stretch relative flex justify-center lg:justify-end items-end overflow-hidden pt-0 mt-0 pb-0 mb-0 h-auto lg:h-full lg:min-h-[580px]">
+      {/* Coluna direita — Restaurado para o desktop com alinhamento na base e mobile isolado */}
+      <div className="order-last lg:order-2 w-full lg:w-1/2 flex flex-col justify-end items-center xl:items-end h-auto lg:h-full lg:self-stretch lg:overflow-hidden relative pt-0 mt-0 pb-0 mb-0">
         <img
           src="/hero-sorriso.jpg"
           alt="Sorriso radiante — Prime Odontologia"
-          className="w-full max-w-[340px] sm:max-w-[420px] mx-auto block mt-0 mb-0 align-bottom h-auto object-cover object-top drop-shadow-none !filter-none select-none lg:absolute lg:top-0 lg:bottom-0 lg:right-0 lg:max-w-none lg:w-full lg:h-full lg:min-w-[650px] lg:object-[75%_top]"
+          className="w-full max-w-[340px] mx-auto mt-2 mb-0 h-auto object-cover object-top block align-bottom drop-shadow-none !filter-none select-none lg:mt-0 lg:max-w-none lg:w-full lg:h-full lg:object-cover lg:object-[center_top] lg:min-h-[580px] lg:block lg:align-bottom"
         />
         {/* Fusão suave de estúdio com o fundo do site na lateral esquerda */}
         <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-paper via-paper/40 to-transparent pointer-events-none hidden lg:block z-10" />

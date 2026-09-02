@@ -30,7 +30,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="inicio"
-      className="relative flex flex-col lg:flex-row items-end justify-between overflow-hidden bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0"
+      className="relative flex flex-col lg:flex-row items-stretch justify-between overflow-hidden bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0 lg:min-h-[calc(100vh-64px)]"
     >
       {/* Atmosfera: brilho dourado suave no topo esquerdo */}
       <motion.div
@@ -199,12 +199,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Coluna direita — Alinhada na base encostando na faixa de especialidades */}
-      <div className="order-last lg:order-2 w-full lg:w-1/2 self-end flex flex-col justify-end items-center lg:items-end h-full mb-0 pb-0 relative overflow-hidden">
+      {/* Coluna direita — Ocupa 100% da altura da navbar até a faixa preta */}
+      <div className="order-last lg:order-2 w-full lg:w-1/2 self-stretch relative flex flex-col justify-end items-center lg:items-end overflow-hidden pt-0 mt-0 pb-0 mb-0 min-h-[480px] lg:min-h-full">
         <img
           src="/hero-sorriso.jpg"
           alt="Sorriso radiante — Prime Odontologia"
-          className="block align-bottom mb-0 w-full max-w-[620px] h-auto object-cover object-bottom drop-shadow-none !filter-none select-none"
+          className="lg:absolute lg:top-0 lg:bottom-0 lg:right-0 w-full lg:w-auto h-full min-h-[480px] lg:min-h-full object-cover object-top block mb-0 align-bottom drop-shadow-none !filter-none select-none"
         />
         {/* Fusão suave de estúdio com o fundo do site na lateral esquerda */}
         <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-paper via-paper/30 to-transparent pointer-events-none hidden lg:block z-10" />

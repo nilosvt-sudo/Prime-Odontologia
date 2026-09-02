@@ -199,12 +199,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Coluna direita — Restaurado para o desktop com alinhamento na base e mobile isolado */}
-      <div className="order-last lg:order-2 w-full lg:w-1/2 flex flex-col justify-end items-center xl:items-end h-auto lg:h-full lg:self-stretch lg:overflow-hidden relative pt-0 mt-0 pb-0 mb-0">
+      {/* Coluna direita — Imagem sem distorção ou corte, alinhada à base com cabeça inteira visível */}
+      <div className="order-last lg:order-2 relative w-full lg:w-1/2 h-full min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-end justify-center lg:justify-end overflow-hidden self-stretch pt-0 mt-0 pb-0 mb-0">
         <img
           src="/hero-sorriso.jpg"
           alt="Sorriso radiante — Prime Odontologia"
-          className="w-full max-w-[340px] mx-auto mt-2 mb-0 h-auto object-cover object-top block align-bottom drop-shadow-none !filter-none select-none lg:mt-0 lg:max-w-none lg:w-full lg:h-full lg:object-cover lg:object-[center_top] lg:min-h-[580px] lg:block lg:align-bottom"
+          className="w-auto h-full max-h-[520px] sm:max-h-[580px] lg:max-h-[620px] object-contain object-bottom block align-bottom mx-auto lg:mx-0 lg:ml-auto drop-shadow-none !filter-none select-none"
         />
         {/* Fusão suave de estúdio com o fundo do site na lateral esquerda */}
         <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-paper via-paper/40 to-transparent pointer-events-none hidden lg:block z-10" />

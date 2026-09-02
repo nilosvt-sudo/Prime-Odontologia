@@ -30,7 +30,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="inicio"
-      className="relative flex flex-col lg:flex-row items-stretch justify-between overflow-hidden bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0 lg:min-h-[calc(100vh-64px)]"
+      className="relative overflow-hidden w-full bg-paper pt-16 sm:pt-18 lg:pt-0 pb-0 mb-0 lg:min-h-[calc(100vh-64px)] flex flex-col lg:flex-row items-center justify-between"
     >
       {/* Atmosfera: brilho dourado suave no topo esquerdo */}
       <motion.div
@@ -53,12 +53,12 @@ export default function Hero() {
       </p>
 
       {/* Coluna esquerda — Textos e Agendamento */}
-      <div className="flex-1 flex items-center justify-center lg:justify-end px-6 sm:px-8 lg:pl-12 lg:pr-4 xl:pr-6 pt-6 sm:pt-8 lg:pt-20 pb-4 sm:pb-6 lg:pb-12 z-10">
+      <div className="relative z-10 w-full max-w-xl lg:max-w-2xl flex items-center justify-center lg:justify-end px-6 sm:px-8 lg:pl-12 lg:pr-4 xl:pr-6 pt-6 sm:pt-8 lg:pt-20 pb-8 sm:pb-10 lg:pb-16">
         <motion.div
           initial={reduced ? undefined : { opacity: 0, y: 20 }}
           animate={reduced ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-xl"
+          className="w-full"
         >
           <motion.p
             initial={reduced ? undefined : { opacity: 0, x: -16 }}
@@ -196,17 +196,24 @@ export default function Hero() {
               <span className="mt-0.5 block h-px w-0 bg-gold-500 transition-all duration-300 group-hover:w-full" />
             </a>
           </motion.div>
+
+          {/* Imagem no Mobile (< lg) — Fluxo normal abaixo do formulário */}
+          <div className="block lg:hidden w-full max-w-[340px] sm:max-w-[400px] mx-auto mt-4 mb-0">
+            <img
+              src="/hero-sorriso.png"
+              alt="Sorriso radiante — Prime Odontologia"
+              className="w-full h-auto object-cover object-top block align-bottom drop-shadow-xl !filter-none select-none"
+            />
+          </div>
         </motion.div>
       </div>
 
-      {/* Coluna direita — Foto da mulher com fundo 100% transparente integrada organicamente ao site */}
-      <div className="order-last lg:order-2 w-full lg:w-1/2 h-full relative overflow-hidden self-stretch flex justify-center lg:justify-end items-end p-0 m-0">
-        <img
-          src="/hero-sorriso.png"
-          alt="Sorriso radiante — Prime Odontologia"
-          className="w-auto h-full max-h-[520px] sm:max-h-[580px] lg:max-h-[640px] block align-bottom object-contain object-bottom drop-shadow-xl !filter-none select-none"
-        />
-      </div>
+      {/* Imagem da mulher no Desktop — Cobertura lateral absoluta preenchendo 100% de cima a baixo */}
+      <img
+        src="/hero-sorriso.png"
+        alt="Sorriso radiante — Prime Odontologia"
+        className="hidden lg:block absolute right-0 bottom-0 top-0 w-1/2 h-full object-cover object-[center_top] pointer-events-none z-0 drop-shadow-2xl !filter-none select-none"
+      />
     </section>
   );
 }
